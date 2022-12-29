@@ -28,7 +28,7 @@ class Helper:
 
     def error_log(self, msg, filename: str = "failed.txt"):
         Path("log").mkdir(parents=True, exist_ok=True)
-        with open(filename, "a") as f:
+        with open(f"log/{filename}", "a") as f:
             print(f"{msg}\n{'-' * 80}", file=f)
 
     def download_url(self, url):
