@@ -234,17 +234,17 @@ class Crawler_Site:
 
     def crawl_comic(self, src):
         logging.info(f"Crawling {src}")
-        try:
-            soup = self.crawl_soup(src)
-            slug = src.split("/")[-1]
+        # try:
+        soup = self.crawl_soup(src)
+        slug = src.split("/")[-1]
 
-            self.crawl_comic_details(soup, slug)
+        self.crawl_comic_details(soup, slug)
 
-        except Exception as e:
-            Noti(f"Failed to crawl {src}", ENV_WEBHOOK=CONFIG.ENV_FAILED)
-            helper.error_log(
-                f"Failed to crawl {src}\n{e}", filename="base.crawl_comic.log"
-            )
+        # except Exception as e:
+        #     Noti(f"Failed to crawl {src}", ENV_WEBHOOK=CONFIG.ENV_FAILED)
+        #     helper.error_log(
+        #         f"Failed to crawl {src}\n{e}", filename="base.crawl_comic.log"
+        #     )
 
     def crawl_page(self, url):
         logging.info(f"Crawling {url}")
