@@ -26,8 +26,9 @@ class Helper:
         }
         return header
 
-    def error_log(self, msg):
-        with open("failed.txt", "a") as f:
+    def error_log(self, msg, filename: str = "failed.txt"):
+        Path("log").mkdir(parents=True, exist_ok=True)
+        with open(filename, "a") as f:
             print(f"{msg}\n{'-' * 80}", file=f)
 
     def download_url(self, url):
@@ -108,7 +109,10 @@ class Helper:
                         if i == imagesCount - 1:
                             combine_image(savedImage, isLastImg=True)
                     except Exception as e:
-                        self.error_log(f"Failed to combine image\n{savedImage}")
+                        self.error_log(
+                            f"Failed to combine image\n{savedImage}",
+                            filename="helper.combine_image.log",
+                        )
                 else:
                     savedImage, isNotSaved = self.save_image(
                         imageUrl, comic_seo, chap_seo, imageName
@@ -122,7 +126,10 @@ class Helper:
                     f'"{i+1}"' + ':{"src":' + f'"{imgSrc}","mime":"image/jpeg"' + "}"
                 )
             except Exception as e:
-                self.error_log(f"Failed to save image\n{imageUrl}\n{e}")
+                self.error_log(
+                    f"Failed to save image\n{imageUrl}\n{e}",
+                    filename="helper.save_image.log",
+                )
                 return ""
 
         return "{" + ",".join(res) + "}"

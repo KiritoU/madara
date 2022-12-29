@@ -82,7 +82,9 @@ class Crawler_Site:
                 title = category.get("title").strip()
                 res.append([name_seo, name, title])
         except Exception as e:
-            helper.error_log(f"Failed to find category\n{e}")
+            helper.error_log(
+                f"Failed to find category\n{e}", filename="base.get_categories_from.log"
+            )
         return res
 
     def get_summary_from(self, soup) -> str:
@@ -202,7 +204,10 @@ class Crawler_Site:
                     try:
                         helper.update_comic_timeupdate(comicId)
                     except Exception as e:
-                        helper.error_log(f"Failed to update comic timeupdate\n{e}")
+                        helper.error_log(
+                            f"Failed to update comic timeupdate\n{e}",
+                            filename="base.update_comic_time.log",
+                        )
 
                     try:
                         # Send noti to discord channel
@@ -210,14 +215,22 @@ class Crawler_Site:
                         msg = f"[NEW] {comicTitle} - {chapTitle}"
                         Noti(msg).send()
                     except Exception as e:
-                        helper.error_log(f"Failed to send notification\n{e}")
+                        helper.error_log(
+                            f"Failed to send notification\n{e}",
+                            filename="base.send_noti.log",
+                        )
 
                 except Exception as e:
-                    helper.error_log(f"Failed to insert chapter\n{e}")
+                    helper.error_log(
+                        f"Failed to insert chapter\n{e}",
+                        filename="base.insert_chapter.log",
+                    )
 
                 time.sleep(CONFIG.WAIT_BETWEEN_CHAPTER)
             except Exception as e:
-                helper.error_log(f"Failed to crawl images\n{href}")
+                helper.error_log(
+                    f"Failed to crawl images\n{href}", filename="base.crawl_images.log"
+                )
 
     def crawl_comic(self, src):
         logging.info(f"Crawling {src}")
@@ -229,7 +242,9 @@ class Crawler_Site:
 
         except Exception as e:
             Noti(f"Failed to crawl {src}", ENV_WEBHOOK=CONFIG.ENV_FAILED)
-            helper.error_log(f"Failed to crawl {src}\n{e}")
+            helper.error_log(
+                f"Failed to crawl {src}\n{e}", filename="base.crawl_comic.log"
+            )
 
     def crawl_page(self, url):
         logging.info(f"Crawling {url}")
