@@ -241,7 +241,7 @@ class Helper:
             "attachment",
             "image/png",
             0,
-            "",
+            # "",
         )
 
         thumbId = database.insert_into(
@@ -280,7 +280,7 @@ class Helper:
             "wp-manga",
             "",
             0,
-            "",
+            # "",
         )
         comicId = database.insert_into(table=f"{CONFIG.TABLE_PREFIX}posts", data=data)
 
