@@ -74,5 +74,7 @@ database = Database()
 if __name__ == "__main__":
     comicTitle = "kahana no shou"
     condition = f'post_title = "{comicTitle}"'
-    be_comic = database.select_all_from(table="madara_posts", condition=condition)
+    be_comic = database.select_all_from(
+        table=f"{CONFIG.TABLE_PREFIX}_posts", condition=condition
+    )
     print(be_comic[0][0])
