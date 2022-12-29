@@ -77,4 +77,4 @@ if __name__ == "__main__":
     be_comic = database.select_all_from(
         table=f"{CONFIG.TABLE_PREFIX}posts", condition=condition
     )
-    print(be_comic[0][0])
+    print(be_comic)
